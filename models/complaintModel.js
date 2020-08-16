@@ -10,8 +10,7 @@ const complaintSchemaModel = new Schema({
   status: {
     type: Number,
     required: true,
-    trim: true,
-    unique: true,
+    default: 0,
   },
   address: {
     type: 'String',
@@ -34,3 +33,4 @@ const complaintSchemaModel = new Schema({
     trim: true,
   },
 });
+module.exports = mongoose.model('complaintModel', complaintSchemaModel);
