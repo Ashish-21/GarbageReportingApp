@@ -1,12 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const userRouter = express.Router();
 const UserModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const Bcrypt = require('bcryptjs');
-const userModel = require('../models/userModel');
 
 //Registering User
-router.post('/register', async (req, res) => {
+userRouter.post('/register', async (req, res) => {
   console.log('[userHandler.js] Entering Post Call for Registering User in DB');
   try {
     req.body.password = Bcrypt.hashSync(req.body.password, 10);
@@ -29,7 +28,7 @@ router.post('/register', async (req, res) => {
 });
 
 //List of Users from DB
-router.get('/listUsers', verifyToken, async (req, res) => {
+userRouter.get('/listUsers', verifyToken, async (req, res) => {
   console.log('[userHandler.js] Entering Get List of  Users in DB');
   try {
     if (req.userTokenData._id == '5f391ddaca97d52f043d1f37') {
@@ -44,7 +43,7 @@ router.get('/listUsers', verifyToken, async (req, res) => {
 });
 
 //updating user in DB
-router.put('/updateUsers', async (req, res) => {
+userRouter.put('/updateUsers', async (req, res) => {
   console.log('[userHandler.js] Entering  Update User in DB');
   if (!req.body) {
     return res.status(400).send({
@@ -70,7 +69,7 @@ router.put('/updateUsers', async (req, res) => {
 });
 
 //login using jwt
-router.post('/login', async (req, res) => {
+userRouter.post('/login', async (req, res) => {
   console.log('[userHandler.js] Login of User');
   if (!req.body) {
     return res.status(400).send({
@@ -117,4 +116,4 @@ function verifyToken(req, res, next) {
   });
 }
 
-module.exports = router;
+module.exports = userRouter;
