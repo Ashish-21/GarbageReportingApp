@@ -53,7 +53,8 @@ complaintRouter.put('/changeStatus', authenticateToken, async (req, res) => {
     const update = {
       status: req.body.status,
     };
-    const updatedComplaint = await complaintModel.findOneAndUpdate(query, update, {
+    const updatedComplaint = await complaintModel
+      .findOneAndUpdate(query, update, {
         new: true,
       })
       .then((result) => {
@@ -62,6 +63,17 @@ complaintRouter.put('/changeStatus', authenticateToken, async (req, res) => {
           updatedComplaint: result,
         });
       });
+  } catch (error) {}
+});
+
+complaintRouter.delete('/deleteComplaint', (req, res) => {
+  try {
+    complaintModel.findByIdAndRemove(req.body._id).then((result) => {
+      res.status(201).json({
+        message: 'Complaint Deleted Successfully',
+        deletedComplaint: result,
+      });
+    });
   } catch (error) {}
 });
 
