@@ -50,11 +50,11 @@ complaintRouter.put('/changeStatus', authenticateToken, async (req, res) => {
     const query = {
       _id: req.body._id,
     };
-    const update = {
+    const updateStatus = {
       status: req.body.status,
     };
     const updatedComplaint = await complaintModel
-      .findOneAndUpdate(query, update, {
+      .findOneAndUpdate(query, updateStatus, {
         new: true,
       })
       .then((result) => {
@@ -66,9 +66,32 @@ complaintRouter.put('/changeStatus', authenticateToken, async (req, res) => {
   } catch (error) {}
 });
 
-complaintRouter.delete('/deleteComplaint', (req, res) => {
+complaintRouter.put(
+  '/updateComplaint',
+  uploadFile.single('complaintImage'),
+  async (req, res) => {
+    try {
+      const query = {
+        _id: req.body._id,
+      };
+      req.body.filename = res.file.originalname;
+      const updatedComplaint = await complaintModel
+        .findOneAndUpdate(query, req.body, {
+          new: true,
+        })
+        .then((result) => {
+          res.status(201).json({
+            message: 'Complaint Registered Successfully',
+            updatedComplaint: result,
+          });
+        });
+    } catch (error) {}
+  }
+);
+
+complaintRouter.delete('/deleteComplaint', async (req, res) => {
   try {
-    complaintModel.findByIdAndRemove(req.body._id).then((result) => {
+    await complaintModel.findByIdAndRemove(req.body._id).then((result) => {
       res.status(201).json({
         message: 'Complaint Deleted Successfully',
         deletedComplaint: result,
