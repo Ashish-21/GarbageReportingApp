@@ -2,13 +2,15 @@ POST http://localhost:9000/userHandler/register
 Content-Type: application/json
 
 {
-    "username":"ashish",
-    "password":"ashish123",
-    "emailId":"ashishchandwani21@gmail.com"
+    "username":"admin",
+    "password":"admin",
+    "emailId":"admini21@gmail.com"
 }
 
 ###
 GET http://localhost:9000/userHandler/listUsers
+Authorization: Bearer
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjM5MWRkYWNhOTdkNTJmMDQzZDFmMzciLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkeWRTeEZ3OTNDMmhYcWVkZ0VWZmJHLmM2dm9KWWswRDNkNENOVlUwL0lkUXhocng0NENEa3EiLCJpYXQiOjE1OTc1NzkzODZ9.wX8CT6WuNQn-mm5Di22-bRHZgCuXLJQ8FzXI2GBDLYk
 
 ###
 PUT  http://localhost:9000/userHandler/updateUsers
@@ -18,4 +20,13 @@ Content-Type: application/json
     "username":"ashish",
     "password":"ashish1233",
     "emailId":"ashishchandwani98@gmail.com"
+}
+
+###
+POST http://localhost:9000/userHandler/login
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "password":"admin"
 }
