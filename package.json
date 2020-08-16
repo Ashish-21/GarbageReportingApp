@@ -1,0 +1,25 @@
+{
+  "name": "garbagereporting",
+  "version": "1.0.0",
+  "description": "A Garbage Reporting Application where a user can report garbage near his/her locality.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon run app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashish-21/GarbageReportingApp.git"
+  },
+  "author": "ashish@21",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashish-21/GarbageReportingApp/issues"
+  },
+  "homepage": "https://github.com/Ashish-21/GarbageReportingApp#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.10.0"
+  }
+}
