@@ -30,3 +30,6 @@ Content-Type: application/json
     "username":"admin",
     "password":"admin"
 }
+
+###
+GET http://localhost:9000/complaintHandler/complaint

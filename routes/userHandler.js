@@ -79,7 +79,7 @@ userRouter.post('/login', async (req, res) => {
   try {
     const user = await UserModel.findOne({
       username: req.body.username,
-    }).exec();
+    });
     if (!user) {
       return res.status(400).send({ message: 'The username does not exist' });
     } else if (!Bcrypt.compareSync(req.body.password, user.password)) {
