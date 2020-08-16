@@ -41,10 +41,29 @@ complaintRouter.post(
       });
     } catch (error) {
       console.log('Error Occurred');
-      x;
     }
   }
 );
+
+complaintRouter.put('/changeStatus', authenticateToken, async (req, res) => {
+  try {
+    const query = {
+      _id: req.body._id,
+    };
+    const update = {
+      status: req.body.status,
+    };
+    const updatedComplaint = await complaintModel.findOneAndUpdate(query, update, {
+        new: true,
+      })
+      .then((result) => {
+        res.status(201).json({
+          message: 'Complaint Registered Successfully',
+          updatedComplaint: result,
+        });
+      });
+  } catch (error) {}
+});
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -60,5 +79,3 @@ function authenticateToken(req, res, next) {
 }
 
 module.exports = complaintRouter;
-
-/*  */
