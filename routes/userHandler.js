@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
 router.get('/listUsers', verifyToken, async (req, res) => {
   console.log('[userHandler.js] Entering Get List of  Users in DB');
   try {
-    if (req.userTokenData.username === 'admin') {
+    if (req.userTokenData._id == '5f391ddaca97d52f043d1f37') {
       const Users = await UserModel.find();
       res.json(Users);
     }
