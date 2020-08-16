@@ -1,0 +1,21 @@
+POST http://localhost:9000/userHandler/register
+Content-Type: application/json
+
+{
+    "username":"ashish",
+    "password":"ashish123",
+    "emailId":"ashishchandwani21@gmail.com"
+}
+
+###
+GET http://localhost:9000/userHandler/listUsers
+
+###
+PUT  http://localhost:9000/userHandler/updateUsers
+Content-Type: application/json
+
+{
+    "username":"ashish",
+    "password":"ashish1233",
+    "emailId":"ashishchandwani98@gmail.com"
+}
