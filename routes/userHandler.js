@@ -48,7 +48,7 @@ userRouter.get('/listUsers', verifyToken, async (req, res) => {
 });
 
 /* Updating User Details in DB */
-userRouter.put('/updateUsers', async (req, res) => {
+userRouter.put('/updateUsers', verifyToken, async (req, res) => {
   console.log('[userHandler.js] Entering  Update User in DB');
   if (!req.body) {
     return res.status(400).send({

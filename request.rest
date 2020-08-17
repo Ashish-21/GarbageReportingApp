@@ -1,25 +1,24 @@
+//Rest Client requests for handling user data *(Rest Client Plugin can be used) 
 POST http://localhost:9000/userHandler/register
 Content-Type: application/json
 
 {
-    "username":"admin",
-    "password":"admin",
-    "emailId":"admini21@gmail.com"
+    "username":"vinay",
+    "password":"vinay123",
+    "emailId":"vinay21@gmail.com"
 }
 
 ###
 GET http://localhost:9000/userHandler/listUsers
-Authorization: Bearer
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjM5MWRkYWNhOTdkNTJmMDQzZDFmMzciLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkeWRTeEZ3OTNDMmhYcWVkZ0VWZmJHLmM2dm9KWWswRDNkNENOVlUwL0lkUXhocng0NENEa3EiLCJpYXQiOjE1OTc1NzkzODZ9.wX8CT6WuNQn-mm5Di22-bRHZgCuXLJQ8FzXI2GBDLYk
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjM5MWRkYWNhOTdkNTJmMDQzZDFmMzciLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkeWRTeEZ3OTNDMmhYcWVkZ0VWZmJHLmM2dm9KWWswRDNkNENOVlUwL0lkUXhocng0NENEa3EiLCJpYXQiOjE1OTc2NDIzNDB9.rsdQJIuq57HvlWDKQXcmxGeiX1YDHnec9MlSaTPo5Ek
 ###
 PUT  http://localhost:9000/userHandler/updateUsers
 Content-Type: application/json
 
 {
     "username":"ashish",
-    "password":"ashish1233",
-    "emailId":"ashishchandwani98@gmail.com"
+    "password":"ashish1533",
+    "emailId":"ashishchandwani928@gmail.com"
 }
 
 ###
@@ -31,5 +30,3 @@ Content-Type: application/json
     "password":"admin"
 }
 
-###
-GET http://localhost:9000/complaintHandler/complaint
