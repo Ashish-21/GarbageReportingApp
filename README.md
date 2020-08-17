@@ -40,6 +40,8 @@ Content-Type: application/json
 "emailId":"xyz@gmail.com"
 }
 
+\*request.rest file containes all http request
+
 # Project Work
 
 Designed a Backend for Garbage Reporting Application
