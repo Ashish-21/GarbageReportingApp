@@ -1,48 +1,53 @@
+/* User Handler handles all the  request for Handling User Data */
 const express = require('express');
 const userRouter = express.Router();
 const UserModel = require('../models/userModel');
-const jwt = require('jsonwebtoken');
-const Bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken'); //Using JWT for Auth
+const Bcrypt = require('bcryptjs'); //Using Bcrypt for Hashing Password
 
-//Registering User
+/* Registering User  */
 userRouter.post('/register', async (req, res) => {
   console.log('[userHandler.js] Entering Post Call for Registering User in DB');
   try {
     req.body.password = Bcrypt.hashSync(req.body.password, 10);
     var user = new UserModel(req.body);
-    var registerUser = await user.save();
-    if (registerUser != null) {
-      console.log('User Saved in DB');
-      res.json(registerUser);
-    } else {
-      res.send('Error occurred in saving user in DB');
-    }
+    var registerUser = await user.save().then((result) => {
+      res.status(201).json({
+        message: 'User Registered Successfully',
+      });
+    });
   } catch (error) {
     console.log(
       '[userHandler.js] Error Occurred Post Call for Registering User in DB' +
         error
     );
-    response.send('Error Occurred' + error);
+    res.json({
+      message: 'Error Occurred in Registration of User' + error,
+    });
   }
   console.log('[userHandler.js] Existing Post Call for Registering User in DB');
 });
 
-//List of Users from DB
+/* Fetching List of users from DB */
 userRouter.get('/listUsers', verifyToken, async (req, res) => {
   console.log('[userHandler.js] Entering Get List of  Users in DB');
   try {
-    if (req.userTokenData._id == '5f391ddaca97d52f043d1f37') {
-      const Users = await UserModel.find();
-      res.json(Users);
-    }
+    const Users = await UserModel.find().then((result) => {
+      res.status(201).json({
+        message: 'List of Users',
+        users: result,
+      });
+    });
   } catch (error) {
     console.log('[userHandler.js] Error Occurred in list User' + error);
-    response.send('Error Occurred:' + error);
+    res.json({
+      message: 'Error Occurred in getting list of users' + error,
+    });
   }
   console.log('[userHandler.js] Existing Get List of  Users in DB');
 });
 
-//updating user in DB
+/* Updating User Details in DB */
 userRouter.put('/updateUsers', async (req, res) => {
   console.log('[userHandler.js] Entering  Update User in DB');
   if (!req.body) {
@@ -59,23 +64,22 @@ userRouter.put('/updateUsers', async (req, res) => {
       returnNewDocument: true,
     };
     await UserModel.findOneAndUpdate(query, req.body, options).then(() => {
-      res.send('user updated');
+      res.status(201).json({
+        message: 'User Updated Successfully',
+      });
     });
   } catch (error) {
     console.log('[userHandler.js] Error Occurred in list User' + error);
-    response.send('Error Occurred:' + error);
+    res.json({
+      message: 'Error Occurred in Updating User' + error,
+    });
   }
   console.log('[userHandler.js] Existing  Update User in DB');
 });
 
-//login using jwt
+/* Login of user and providing authorization token  */
 userRouter.post('/login', async (req, res) => {
-  console.log('[userHandler.js] Login of User');
-  if (!req.body) {
-    return res.status(400).send({
-      message: 'Data can not be empty!',
-    });
-  }
+  console.log('[userHandler.js] Entering Login of User');
   try {
     const user = await UserModel.findOne({
       username: req.body.username,
@@ -92,20 +96,23 @@ userRouter.post('/login', async (req, res) => {
         password: user.password,
       };
       const accessToken = jwt.sign(userTokenData, process.env.SECRETKEY);
-      res.send({
+      res.json({
         message: 'Login Successful',
         accessToken: accessToken,
       });
     }
   } catch (error) {
-    console.log(error);
+    res.json({
+      message: 'Error Occurred in Login of User' + error,
+    });
   }
+  console.log('[userHandler.js] Existing Login of User');
 });
 
+/* Utility to verify token retrieve for request */
 function verifyToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  console.log(token);
   if (!token) {
     return res.status(401).end();
   }
