@@ -8,6 +8,7 @@ clone git : https://github.com/Ashish-21/GarbageReportingApp.git
 
 ```bash
 npm install
+nodemon run start
 ```
 
 # Configuration Changes(If required)
