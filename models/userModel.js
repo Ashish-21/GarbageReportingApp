@@ -1,3 +1,4 @@
+/* Model for storing User Data in MongoDB */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const userSchemaModel = new Schema({

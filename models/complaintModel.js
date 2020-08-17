@@ -1,3 +1,4 @@
+/* Model for storing Complaint in MongoDB */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const complaintSchemaModel = new Schema({
