@@ -68,20 +68,22 @@ complaintRouter.put('/changeStatus', authenticateToken, async (req, res) => {
 
 complaintRouter.put(
   '/updateComplaint',
+  authenticateToken,
   uploadFile.single('complaintImage'),
   async (req, res) => {
     try {
       const query = {
         _id: req.body._id,
       };
-      req.body.filename = res.file.originalname;
+      console.log(req.file);
+      req.body.filename = req.file.originalname;
       const updatedComplaint = await complaintModel
         .findOneAndUpdate(query, req.body, {
           new: true,
         })
         .then((result) => {
           res.status(201).json({
-            message: 'Complaint Registered Successfully',
+            message: 'Complaint Updated Successfully',
             updatedComplaint: result,
           });
         });
