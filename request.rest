@@ -3,22 +3,24 @@ POST http://localhost:9000/userHandler/register
 Content-Type: application/json
 
 {
-    "username":"vinay",
-    "password":"vinay123",
-    "emailId":"vinay21@gmail.com"
+    "username":"xyz",
+    "password":"xyz123",
+    "emailId":"xyz123@gmail.com"
 }
 
 ###
 GET http://localhost:9000/userHandler/listUsers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjM5MWRkYWNhOTdkNTJmMDQzZDFmMzciLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkeWRTeEZ3OTNDMmhYcWVkZ0VWZmJHLmM2dm9KWWswRDNkNENOVlUwL0lkUXhocng0NENEa3EiLCJpYXQiOjE1OTc2NDIzNDB9.rsdQJIuq57HvlWDKQXcmxGeiX1YDHnec9MlSaTPo5Ek
+Authorization: Bearer Your_AUTHENTCATION_TOKEN
+
 ###
 PUT  http://localhost:9000/userHandler/updateUsers
+Authorization: Bearer Your_AUTHENTCATION_TOKEN
 Content-Type: application/json
 
 {
-    "username":"ashish",
-    "password":"ashish1533",
-    "emailId":"ashishchandwani928@gmail.com"
+    "username":"xyz",
+    "password":"xyz123",
+    "emailId":"xyz123@gmail.com"
 }
 
 ###
@@ -29,4 +31,42 @@ Content-Type: application/json
     "username":"admin",
     "password":"admin"
 }
+
+//Rest Client Request for handling complaint data
+
+###
+POST http://localhost:9000/complaintHandler/savecomplaint
+Authorization: Bearer Your_AUTHENTCATION_TOKEN
+
+use Postman and select form-data and provide values for below attributes
+key compaintImage type: file
+key status type:number
+key address: type text
+key description : type text
+key latitude : number (In real application it can be fetched using geoloction api on client side and pass to server) 
+key longitude : number (In real application it can be fetched using geoloction api on client side and pass to server) 
+
+### 
+PUT http://localhost:9000/complaintHandler/changeStatus
+Authorization: Bearer Your_AUTHENTCATION_TOKEN
+
+{
+    "status":"1",
+    "_id":"YOUR_COMPLAINT_ID"
+}
+
+###
+DELETE http://localhost:9000/complaintHandler/deleteComplaint
+{
+    "_id":"YOUR_COMPLAINT_ID"
+}
+
+###
+PUT http://localhost:9000/complaintHandler/updateComplaint
+same attributes as save complaint
+
+###
+GET http://localhost:9000/complaintHandler/listComplaint
+
+
 
