@@ -39,12 +39,12 @@ POST http://localhost:9000/complaintHandler/savecomplaint
 Authorization: Bearer Your_AUTHENTCATION_TOKEN
 
 use Postman and select form-data and provide values for below attributes
-key compaintImage type: file
-key status type:number
-key address: type text
-key description : type text
-key latitude : number (In real application it can be fetched using geoloction api on client side and pass to server) 
-key longitude : number (In real application it can be fetched using geoloction api on client side and pass to server) 
+key:  compaintImage type: file
+key: status type:number
+key: address: type text
+key: description : type text
+key: latitude : number (In real application it can be fetched using geoloction api on client side and pass to server) 
+key: longitude : number (In real application it can be fetched using geoloction api on client side and pass to server) 
 
 ### 
 PUT http://localhost:9000/complaintHandler/changeStatus
@@ -63,7 +63,8 @@ DELETE http://localhost:9000/complaintHandler/deleteComplaint
 
 ###
 PUT http://localhost:9000/complaintHandler/updateComplaint
-same attributes as save complaint
+same attributes as save complaint and
+key: _id value: YOUR_COMPLAINT DATA type:text
 
 ###
 GET http://localhost:9000/complaintHandler/listComplaint

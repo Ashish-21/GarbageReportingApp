@@ -133,29 +133,33 @@ complaintRouter.put(
 );
 
 /* Deleting the complaint from DB  */
-complaintRouter.delete('/deleteComplaint', async (req, res) => {
-  console.log(
-    '[complaintHandler.js] Entering delete Call for deleting Complaint Data in DB'
-  );
-  try {
-    await complaintModel.findByIdAndRemove(req.body._id).then((result) => {
-      res.status(201).json({
-        message: 'Complaint Deleted Successfully',
-        deletedComplaint: result,
-      });
-    });
-  } catch (error) {
+complaintRouter.delete(
+  '/deleteComplaint',
+  authenticateToken,
+  async (req, res) => {
     console.log(
-      '[complaintHandler.js] Error Occurred in Deleting Complaint' + error
+      '[complaintHandler.js] Entering delete Call for deleting Complaint Data in DB'
     );
-    res.json({
-      message: 'Error Occurred in Deleting Complaint' + error,
-    });
+    try {
+      await complaintModel.findByIdAndRemove(req.body._id).then((result) => {
+        res.status(201).json({
+          message: 'Complaint Deleted Successfully',
+          deletedComplaint: result,
+        });
+      });
+    } catch (error) {
+      console.log(
+        '[complaintHandler.js] Error Occurred in Deleting Complaint' + error
+      );
+      res.json({
+        message: 'Error Occurred in Deleting Complaint' + error,
+      });
+    }
+    console.log(
+      '[complaintHandler.js] Existing delete Call for deleting Complaint Data in DB'
+    );
   }
-  console.log(
-    '[complaintHandler.js] Existing delete Call for deleting Complaint Data in DB'
-  );
-});
+);
 
 /* Utitlity to verify Authorization token */
 function authenticateToken(req, res, next) {
