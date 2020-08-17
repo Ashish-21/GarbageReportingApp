@@ -171,4 +171,33 @@ function authenticateToken(req, res, next) {
   });
 }
 
+/* Getting list of complaints uploaded by particular user using their userId  */
+complaintRouter.get('/listComplaint', authenticateToken, async (req, res) => {
+  console.log(
+    '[complaintHandler.js] Entering Get List of Complaints uploaded by particular user from DB'
+  );
+  try {
+    const complaints = await complaintModel
+      .find({
+        userId: req.userTokenData._id,
+      })
+      .then((result) => {
+        res.status(201).json({
+          message: 'Complaints Fetched Successfully',
+          complaint: result,
+        });
+      });
+  } catch (error) {
+    console.log(
+      '[complaintHandler.js] Error Occurred in fetching complaints' + error
+    );
+    res.json({
+      message: 'Error Occurred in getting list of users' + error,
+    });
+  }
+  console.log(
+    '[ComplaintHandler.js] Existing Get List of Complaints uploaded by particular user from DB'
+  );
+});
+
 module.exports = complaintRouter;
